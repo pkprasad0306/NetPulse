@@ -1,113 +1,129 @@
-﻿# 🖧 NetPulse — Network Diagnostics Toolkit
+﻿# NetPulse — Network Diagnostics Toolkit
 
-**NetPulse** is a clean, beginner-friendly Python project for essential network troubleshooting and connectivity diagnostics. It features a modern **Streamlit** dashboard, persistent **CSV history tracking**, **exportable reports**, and an automated **pytest** test suite.
+A beginner-friendly network diagnostics dashboard built with Python and Streamlit. NetPulse helps users perform basic connectivity checks, inspect DNS records, test TCP port connectivity, and review diagnostic history through a simple web interface.
 
----
 ## Dashboard Preview
 
 ![NetPulse Dashboard](screenshots/netpulse-dashboard.png)
 
-NetPulse provides a simple web interface for checking host reachability, resolving DNS records, testing TCP port connectivity, and reviewing diagnostic history.
+## Features
 
-## 🚀 Features
+- **Ping Reachability:** Check whether a hostname or IP address is reachable and inspect round-trip latency.
+- **DNS Lookup:** Query supported DNS records and view resolution results.
+- **TCP Port Check:** Test connectivity to a specified TCP port on a target host.
+- **Diagnostic History:** Store and review previous diagnostic results.
+- **CSV Export:** Download diagnostic history for further analysis.
+- **Input Validation:** Validate hostnames, IP addresses, and port values before running checks.
+- **Automated Tests:** Unit tests cover the main diagnostic functions and history management.
 
-1. **🏓 Host Reachability (Ping)**:
-   - Uses platform-aware ICMP ping commands (Windows `-n`, Linux/macOS `-c`).
-   - Strict timeouts and safe subprocess execution (without `shell=True`).
-   - Measures round-trip latency (ms) and packet loss percentage.
+## Technology Stack
 
-2. **🌐 DNS Record Lookup**:
-   - Resolves IPv4 (`A`) and IPv6 (`AAAA`) addresses using standard library sockets.
-   - Queries Mail Exchange (`MX`) and Canonical Name (`CNAME`) records using `dnspython`.
-   - Computes query lookup latency in milliseconds.
+- **Language:** Python
+- **Web interface:** Streamlit
+- **Networking:** Python socket programming and system ping utilities
+- **DNS:** dnspython and socket-based resolution
+- **Data handling:** Pandas and CSV
+- **Testing:** pytest
 
-3. **🔌 Single TCP Port Connectivity**:
-   - Tests reachability for any individual TCP port (1–65535).
-   - Fast socket connection timeouts with automatic service identification (e.g. HTTP, HTTPS, SSH, MySQL).
-
-4. **📊 Diagnostic History & Export**:
-   - Automatically records every test outcome with timestamps to `data/diagnostic_history.csv`.
-   - Filter history by tool or status.
-   - Download reports instantly in **CSV** or **JSON** format.
-
-5. **🧪 Automated Tests**:
-   - Comprehensive unit test suite with 100% offline mocking using `pytest`.
-
----
-
-## 📁 Project Structure
+## Project Structure
 
 ```text
-NetPulse/
-│
-├── core/                          # Modular diagnostic logic (independent of UI)
-│   ├── __init__.py                # Package initializer
-│   ├── ping_checker.py            # Ping host reachability checker
-│   ├── dns_lookup.py              # DNS resolution (A, AAAA, MX, CNAME)
-│   ├── port_scanner.py            # Single TCP port connectivity checker
-│   └── history_manager.py         # CSV history logging, retrieval, and export
-│
-├── tests/                         # Pytest automated test suite
-│   ├── __init__.py
-│   ├── test_ping_checker.py       # Unit tests for ping checker
-│   ├── test_dns_lookup.py         # Unit tests for DNS lookup
-│   ├── test_port_scanner.py       # Unit tests for TCP port checker
-│   └── test_history_manager.py    # Unit tests for CSV history manager
-│
-├── app.py                         # Streamlit web dashboard
-├── requirements.txt               # Project dependencies
-├── data/                          # Diagnostic logs directory
+NetPluse/
+├── core/
+│   ├── dns_lookup.py
+│   ├── history_manager.py
+│   ├── ping_checker.py
+│   └── port_scanner.py
+├── data/
 │   └── .gitkeep
-└── README.md                      # Documentation & instructions
+├── screenshots/
+│   └── netpulse-dashboard.png
+├── tests/
+│   ├── test_dns_lookup.py
+│   ├── test_history_manager.py
+│   ├── test_ping_checker.py
+│   └── test_port_scanner.py
+├── app.py
+├── requirements.txt
+├── README.md
+└── .gitignore
 ```
 
----
+## Getting Started
 
-## ⚙️ Installation & Setup (Windows)
+### Prerequisites
 
-### 1. Open PowerShell in the project directory
+- Python 3.10 or a compatible version
+- Git
+- An internet connection for testing external hosts and DNS queries
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/pkprasad0306/NetPulse.git
+cd NetPulse
+```
+
+### 2. Create and activate a virtual environment
+
+**Windows PowerShell:**
+
 ```powershell
-cd "c:\Users\PRASAD KASURDE\OneDrive\Desktop\NetPluse"
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
 ```
 
-### 2. (Optional) Create and activate a virtual environment
-```powershell
-python -m venv venv
-.\venv\Scripts\Activate.ps1
-```
+If PowerShell blocks activation, you can run the commands below using `.venv\Scripts\python.exe` directly instead.
 
-### 3. Install required dependencies
+### 3. Install dependencies
+
 ```powershell
 python -m pip install -r requirements.txt
 ```
 
----
+### 4. Run the application
 
-## 🧪 Running Automated Tests
-
-Run the full pytest suite with verbose output:
-```powershell
-python -m pytest tests/ -v
-```
-
----
-
-## 🌐 Launching the Streamlit Web Dashboard
-
-Start the local web application:
 ```powershell
 python -m streamlit run app.py
 ```
 
-Once started, open your browser and navigate to:
-```text
-http://localhost:8501
+Open the local URL shown in the terminal.
+
+## Run Tests
+
+Install pytest if it is not already included in your environment:
+
+```powershell
+python -m pip install pytest
 ```
+
+Run the test suite:
+
+```powershell
+python -m pytest tests/ -v
+```
+
+The project has **24 passing unit tests** in the latest recorded test run.
+
+## Scope and Limitations
+
+NetPulse is a learning and troubleshooting tool for basic host reachability, DNS resolution, and TCP connectivity. It is not a telecom core-network monitoring platform and does not analyze cellular signalling, mobile subscriber sessions, or production network KPIs.
+
+Results depend on the local environment, firewall rules, network access, and the availability of the target host.
+
+## Future Improvements
+
+- Add visual summaries of diagnostic history.
+- Improve error reporting and troubleshooting guidance.
+- Deploy a hosted demonstration.
+- Expand test coverage for additional network edge cases.
+
+## Author
+
+**Prasad Kasurde**
+
+GitHub: [pkprasad0306](https://github.com/pkprasad0306)
 
 ---
 
-## 🛡️ Design Principles & Safety
-
-- **Safe Subprocess**: Subprocess arguments are passed as structured lists with `shell=False` and strict timeouts to prevent command injection.
-- **Independent Core**: All business logic resides in `core/` and can be imported in other scripts or CLI tools without requiring Streamlit.
-- **Offline-Friendly Tests**: Network calls in tests are fully mocked so unit tests never fail due to intermittent internet connectivity.
+This project was developed for practical learning in Python, networking fundamentals, and automated testing.
