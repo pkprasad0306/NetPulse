@@ -3,6 +3,11 @@
 **NetPulse** is a clean, beginner-friendly Python project for essential network troubleshooting and connectivity diagnostics. It features a modern **Streamlit** dashboard, persistent **CSV history tracking**, **exportable reports**, and an automated **pytest** test suite.
 
 ---
+## Dashboard Preview
+
+![NetPulse Dashboard](screenshots/netpulse-dashboard.png)
+
+NetPulse provides a simple web interface for checking host reachability, resolving DNS records, testing TCP port connectivity, and reviewing diagnostic history.
 
 ## 🚀 Features
 
