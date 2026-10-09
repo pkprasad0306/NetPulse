@@ -2,6 +2,12 @@
 
 A beginner-friendly network diagnostics dashboard built with Python and Streamlit. NetPulse helps users perform basic connectivity checks, inspect DNS records, test TCP port connectivity, and review diagnostic history through a simple web interface.
 
+## Live Demo
+
+Try NetPulse online: [**Launch NetPulse**](https://netpulse-8dhnnt8kfxygjiyynhyqgd.streamlit.app/)
+
+No local installation is required to explore the dashboard.
+
 ## Dashboard Preview
 
 ![NetPulse Dashboard](screenshots/netpulse-dashboard.png)
